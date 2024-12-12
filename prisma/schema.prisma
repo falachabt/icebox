@@ -1,0 +1,137 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum UserRole {
+  ADMIN
+  JURY
+}
+
+model User {
+  id            String         @id @default(cuid())
+  name          String?
+  email         String?        @unique
+  image         String?
+  accounts      Account[]
+  emailVerified Boolean?       @default(false)
+  role          UserRole       @default(JURY)
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+  // Relations
+  votingSessions VotingSession[] @relation("SessionJury")
+  createdSessions VotingSession[] @relation("SessionAdmin")
+  votes         Vote[]
+}
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Campus {
+  id          String    @id @default(cuid())
+  name        String
+  description String?   @db.Text
+  location    String?
+  imageUrl    String?   // Campus image URL
+  imageKey    String?   // For uploadthing file reference
+  status      String    @default("active") // active, inactive
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  // Relations
+  votingSessions VotingSession[]
+  votes         Vote[]
+
+  ManualScore ManualScore[]
+}
+
+model Criterion {
+  id          String    @id @default(cuid())
+  name        String
+  description String?   @db.Text
+  weight      Float     // Percentage weight affecting total score
+  isVotable   Boolean   @default(true)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  // Relations
+  votingSessions VotingSession[]
+  votes          Vote[]
+
+  ManualScore ManualScore[]
+}
+
+model VotingSession {
+  id          String    @id @default(cuid())
+  sessionCode String    @unique // Unique code for jury access
+  title       String
+  description String?   @db.Text
+  startDate   DateTime
+  endDate     DateTime
+  isActive    Boolean   @default(true)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  // Relations
+  admin       User      @relation("SessionAdmin", fields: [adminId], references: [id])
+  adminId     String
+  juryMembers User[]    @relation("SessionJury")
+  campuses     Campus[]    
+  criteria    Criterion[]
+  votes       Vote[]
+
+  ManualScore ManualScore[]
+}
+
+model Vote {
+  id          String        @id @default(cuid())
+  score       Float
+  comment     String?       @db.Text
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+  // Relations
+  user        User          @relation(fields: [userId], references: [id])
+  userId      String
+  session     VotingSession @relation(fields: [sessionId], references: [id])
+  sessionId   String
+  campus      Campus        @relation(fields: [campusId], references: [id])
+  campusId    String
+  criterion   Criterion     @relation(fields: [criterionId], references: [id])
+  criterionId String
+
+  @@unique([userId, sessionId, campusId, criterionId])
+}
+
+// Add this to your Prisma schema
+model ManualScore {
+  id              String        @id @default(cuid())
+  score           Float
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+  // Relations
+  session         VotingSession @relation(fields: [sessionId], references: [id])
+  sessionId       String
+  campus          Campus        @relation(fields: [campusId], references: [id])
+  campusId        String
+  criterion       Criterion     @relation(fields: [criterionId], references: [id])
+  criterionId     String
+
+  @@unique([sessionId, campusId, criterionId])
+}
