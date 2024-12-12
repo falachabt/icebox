@@ -45,6 +45,7 @@ export function LandingHero() {
       router.push(`/vote/${sessionCode}`)
     }
   }
+  
 
   return (
     <div className="space-y-3 py-36 text-center font-bold sm:space-y-5">
