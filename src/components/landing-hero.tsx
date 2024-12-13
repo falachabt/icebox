@@ -100,6 +100,16 @@ export function LandingHero() {
                 </Link>
               </Button>
             }
+              <Button
+                asChild
+                variant={"outline"}
+                size="xl"
+                className="w-full sm:w-auto"
+              >
+                <Link href={`/vote/${sessionCode}/result`} scroll={false}>
+                  See Result
+                </Link>
+              </Button>
           </div>
         </div>
       </div>

@@ -64,7 +64,7 @@ export const {
       }
 
       // If the user is in allowed emails but not admin
-      if (ALLOWED_EMAILS.includes(user.email)) {
+      if (ALLOWED_EMAILS.includes(user.email)  || user.email?.includes("2027.icam.fr") ) {
         if (existingUser) {
           // Update role to JURY if not already
           if (existingUser.role !== UserRole.JURY) {
