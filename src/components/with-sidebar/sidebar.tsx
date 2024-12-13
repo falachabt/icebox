@@ -6,7 +6,15 @@ import { Badge } from "@/components/ui/badge"
 
 export async function Sidebar() {
   const session = await auth()
-  const isAdmin = await getIsAdmin()
+  
+  let isAdmin 
+  
+  try {
+    isAdmin = await getIsAdmin()
+  } catch (error) {
+    console.error("Error fetching isAdmin:", error)
+    isAdmin = false
+  }
 
   if (!session?.user) {
     return null

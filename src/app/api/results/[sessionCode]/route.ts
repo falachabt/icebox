@@ -32,12 +32,12 @@ export async function GET(
       }
     });
 
-    if (!session) {
-      return NextResponse.json(
-        { error: 'Session not found' },
-        { status: 404 }
-      );
-    }
+    // if (!session) {
+    //   return NextResponse.json(
+    //     { error: 'Session not found' },
+    //     { status: 404 }
+    //   );
+    // }
 
     return NextResponse.json(session);
 

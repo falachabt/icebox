@@ -9,7 +9,15 @@ export async function PUT(
 ) {
   try {
     const session = await auth();
-    const isAdmin = await getIsAdmin();
+    
+    let isAdmin 
+  
+  try {
+    isAdmin = await getIsAdmin()
+  } catch (error) {
+    console.error("Error fetching isAdmin:", error)
+    isAdmin = false
+  }
 
     if (!session) {
       return new NextResponse("Unauthorized", { status: 401 });
@@ -45,7 +53,15 @@ export async function DELETE(
 ) {
   try {
     const session = await auth();
-    const isAdmin = await getIsAdmin();
+    
+    let isAdmin 
+  
+  try {
+    isAdmin = await getIsAdmin()
+  } catch (error) {
+    console.error("Error fetching isAdmin:", error)
+    isAdmin = false
+  }
 
     if (!session) {
       return new NextResponse("Unauthorized", { status: 401 });

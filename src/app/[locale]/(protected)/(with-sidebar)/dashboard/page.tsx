@@ -6,7 +6,15 @@ import { SessionCodeHandler } from "./_components/sessionCodeHandler"
 
 export default async function Dashboard() {
   const session = await auth()
-  const isAdmin = await getIsAdmin()
+  
+  let isAdmin 
+  
+  try {
+    isAdmin = await getIsAdmin()
+  } catch (error) {
+    console.error("Error fetching isAdmin:", error)
+    isAdmin = false
+  }
 
   if (!session?.user) {
     return null

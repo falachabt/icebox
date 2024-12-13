@@ -6,15 +6,22 @@ import { db } from "@/lib/db";
 export async function GET() {
   try {
     const session = await auth();
-    const isAdmin = await getIsAdmin();
+    let isAdmin 
+  
+  try {
+    isAdmin = await getIsAdmin()
+  } catch (error) {
+    console.error("Error fetching isAdmin:", error)
+    isAdmin = false
+  }
 
 
     console.log("Session", session)
     console.log("isAdmin", isAdmin)
 
-    if (!session) {
-      return new NextResponse("Unauthorized", { status: 401 });
-    }
+    // if (!session) {
+    //   return new NextResponse("Unauthorized", { status: 401 });
+    // }
 
     if (!isAdmin) {
       // return new NextResponse("Forbidden", { status: 403 });
