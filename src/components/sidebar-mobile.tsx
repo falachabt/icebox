@@ -16,7 +16,7 @@ import { Logo } from "@/components/logo"
 import { SidebarMobileNavItem } from "@/components/sidebar-mobile-nav-item"
 import { publicRoutes } from "@/../app.config"
 
-const routes = [publicRoutes.pricing, publicRoutes.contact]
+const routes = [publicRoutes.dashboard]
 
 export function SidebarMobile({ className }: { className?: string }) {
   const t = useTranslations()

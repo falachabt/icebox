@@ -8,7 +8,7 @@ import { db } from "@/lib/db";
 import { env } from "@/../.env.mjs";
 
 // Define admin and allowed email groups
-const ADMIN_EMAILS = ["benny.tenezeu@2027.icam.fr"];
+const ADMIN_EMAILS = ["benny.tenezeu@2027.icam.fr","mailys.coupannec@2027.icam.fr","sephora.mounoussala@2027.icam.fr"];
 const ALLOWED_EMAILS = ["hye@domain.com", ...ADMIN_EMAILS];
 
 export const {
