@@ -9,7 +9,7 @@ import { env } from "@/../.env.mjs";
 
 // Define admin and allowed email groups
 const ADMIN_EMAILS = ["benny.tenezeu@2027.icam.fr","mailys.coupannec@2027.icam.fr","sephora.mounoussala@2027.icam.fr"];
-const ALLOWED_EMAILS = ["hye@domain.com", ...ADMIN_EMAILS];
+const ALLOWED_EMAILS = ["sephora.mounoussala@2027.icam.fr", ...ADMIN_EMAILS];
 
 export const {
   handlers: { GET, POST },
