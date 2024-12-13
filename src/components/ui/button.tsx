@@ -20,7 +20,7 @@ const buttonVariants = cva(
           "hover:bg-zinc-100 hover:text-zinc-900 dark:hover:bg-zinc-800 dark:hover:text-zinc-50",
         link: "text-zinc-900 underline-offset-4 hover:text-zinc-700 hover:underline dark:text-zinc-50",
         gradient:
-          "bg-gradient-to-r from-rose-500 to-pink-500 text-white hover:text-white hover:opacity-90",
+          "bg-gradient-to-r from-orange-500 to-pink-500 text-white hover:text-white hover:opacity-90",
       },
       size: {
         default: "h-10 px-4 py-2",

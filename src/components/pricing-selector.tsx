@@ -24,7 +24,7 @@ export function PricingSelector() {
             <TabsTrigger value="annual">
               {t.rich("pay_annualy", {
                 badge: value => (
-                  <Badge className="ml-2 bg-rose-500">
+                  <Badge className="ml-2 bg-orange-500">
                     {value}
                   </Badge>
                 ),

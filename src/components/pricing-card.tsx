@@ -53,7 +53,7 @@ export function PricingCard({
               pricingMode === "monthly" ? monthlyPrice : annualPrice,
           })}
         </p>
-        <p className="h-4 text-xs text-rose-500">
+        <p className="h-4 text-xs text-orange-500">
           {pricingMode === "annual" &&
             savingsAmount &&
             t("savings", { amount: savingsAmount })}
@@ -61,7 +61,7 @@ export function PricingCard({
         <div>
           {features.map((feature: string) => (
             <div key={feature} className="flex items-center space-x-2">
-              <Check className="text-rose-500" size={16} />
+              <Check className="text-orange-500" size={16} />
               <span>{feature}</span>
             </div>
           ))}

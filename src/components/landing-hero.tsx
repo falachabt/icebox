@@ -53,12 +53,12 @@ export function LandingHero() {
         <h1>
           {t.rich("title", {
             underline: value => (
-              <span className="text-rose-500 underline">{value}</span>
+              <span className="text-orange-500 underline">{value}</span>
             ),
             bolt: value => <span className="font-bold">{value}</span>,
           })}
         </h1>
-        <div className="h-16 bg-gradient-to-r from-rose-500 to-pink-500 bg-clip-text text-transparent sm:h-16">
+        <div className="h-16 bg-gradient-to-r from-orange-500 to-pink-500 bg-clip-text text-transparent sm:h-16">
           <TypewriterComponent
             options={{
               strings: [t("lille"), t("gps"), t("manille")],

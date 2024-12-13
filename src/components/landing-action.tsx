@@ -9,7 +9,7 @@ export async function LandingAction() {
   const t = await getTranslations("Components.LandingAction")
   return (
     <LandingSection className="bg-zinc-50/80">
-      <div className="mx-auto max-w-6xl space-y-6 rounded-xl bg-gradient-to-r from-rose-500 to-pink-500 py-24 text-center">
+      <div className="mx-auto max-w-6xl space-y-6 rounded-xl bg-gradient-to-r from-orange-500 to-pink-500 py-24 text-center">
         <Heart size={48} className="mx-auto text-white" />
         <LandingTitle className="text-white">{t("title")}</LandingTitle>
         <Button size="xl" className="space-x-2">

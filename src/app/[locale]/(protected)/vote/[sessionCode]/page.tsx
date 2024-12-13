@@ -2,9 +2,8 @@
 import { notFound } from 'next/navigation'
 import { db } from '@/lib/db'
 import VotingForm from './_components/voting-form'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-// import { getSession } from '@/lib/auth'
-import { redirect } from 'next/navigation'
+import InactiveSessionResult from './_components/inactive-session-result'
+import { hasAlreadyTakenVote } from './_components/_actions'
 
 export default async function VotingPage({ 
   params: { sessionCode } 
@@ -22,49 +21,26 @@ export default async function VotingPage({
         where: {
           isVotable: true
         }
-      },
-      
+      }
     }
   })
 
-  // if (!session) {
-  //   notFound()
-  // }
+  const canVote = await hasAlreadyTakenVote({ sessionCode : sessionCode });
+
+  if(!canVote.success){
+    return <InactiveSessionResult canVote = { canVote.success }  />
+  }
 
   // If session exists but is not active
   if (!session?.isActive) {
-    return (
-      <div className="container mx-auto flex items-center justify-center min-h-screen">
-        <Card className="w-full max-w-md">
-          <CardHeader>
-            <CardTitle className="text-red-600">Session Not Active</CardTitle>
-            <CardDescription>
-              This voting session is currently not active. Please contact the administrator.
-            </CardDescription>
-          </CardHeader>
-        </Card>
-      </div>
-    )
+    return <InactiveSessionResult canVote = { true }  />
   }
 
-  // If user has already voted
-  // if (session.votes.length > 0) {
-  //   redirect(`/vote/${sessionCode}/results`)
-  // }
-
   return (
-    <div className="container mx-auto py-8">
-      <Card>
-        <CardHeader>
-          <CardTitle>{session.title}</CardTitle>
-          {session.description && (
-            <CardDescription>{session.description}</CardDescription>
-          )}
-        </CardHeader>
-        <CardContent>
-          <VotingForm session={session} />
-        </CardContent>
-      </Card>
+    <div className="bg-background">
+      <main className="max-w-screen-2xl mx-auto">
+        <VotingForm session={session} />
+      </main>
     </div>
   )
 }

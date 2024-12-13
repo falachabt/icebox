@@ -6,7 +6,7 @@ export function LandingSubtitle({
 }: React.ComponentProps<"p">) {
   return (
     <p
-      className={cn("text-base font-bold text-rose-500 lg:text-xl", className)}
+      className={cn("text-base font-bold text-orange-500 lg:text-xl", className)}
     >
       {children}
     </p>

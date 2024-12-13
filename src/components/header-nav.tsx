@@ -10,7 +10,7 @@ const routes = [publicRoutes.pricing, publicRoutes.contact]
 export function HeaderNav({ className }: { className?: string }) {
   const t = useTranslations("Routes")
   return (
-    <div className={cn("mt-1 flex items-center space-x-8", className)}>
+    <div className={cn("mt-1 flex items-center bg-white z-[99999] space-x-8", className)}>
       {routes.map(
         item =>
           item && (

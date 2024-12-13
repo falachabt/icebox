@@ -23,7 +23,7 @@ export function Logo({
       aria-label={`Go to ${appConfig.name} homepage`}
     >
       <span
-        className="overflow-hidden rounded-lg text-rose-500"
+        className="overflow-hidden rounded-lg text-orange-500"
         aria-hidden="true"
       >
         <Image
