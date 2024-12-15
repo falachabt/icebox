@@ -4,12 +4,11 @@ import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
-import { Rate, Image as AntImage, Divider } from 'antd';
+import { Rate, Image as AntImage, Divider, Image } from 'antd';
 import { Badge } from '@/components/ui/badge';
 import { toast } from 'sonner';
 import { submitVote } from './_actions';
 import { motion, AnimatePresence } from 'framer-motion';
-
 interface Criterion {
   id: string;
   name: string;
@@ -34,14 +33,6 @@ interface Session {
   isActive: boolean;
   campuses: Campus[];
   criteria: Criterion[];
-}
-
-interface Criterion {
-  id: string;
-  name: string;
-  weight: number;
-  description?: string;
-  imageUrl?: string; // Will be added later
 }
 
 interface CriterionVote {
@@ -72,9 +63,19 @@ const StepwiseVotingForm: React.FC<StepwiseVotingFormProps> = ({ session }) => {
     }), {})
   );
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
+ 
 
   const currentCampus = session.campuses[currentCampusIndex];
   const currentCriterion = session.criteria[currentCriterionIndex];
+
+  const getEmojiSeed = (score: number): string => {
+    if (score === 0) return 'Destiny'; // Neutral face
+    if (score <= 20) return 'Sawyer'; // Very angry
+    if (score <= 40) return 'Brooklynn'; // Sad
+    if (score <= 60) return 'Valentina'; // Slight smile
+    if (score <= 80) return 'Adrian'; // Happy
+    return 'rich'; // Super happy with sunglasses
+  };
 
   const handleVoteChange = (value: number) => {
     const score = value * 20;
@@ -162,7 +163,9 @@ const StepwiseVotingForm: React.FC<StepwiseVotingFormProps> = ({ session }) => {
   };
 
   return (
-    <div className="flex flex-col ">
+    <div className="flex flex-col">
+
+      
       <div className="border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
         <div className="px-4 md:px-6 py-4">
           <div className="flex flex-col md:flex-row md:items-center text-center justify-between gap-4">
@@ -212,8 +215,18 @@ const StepwiseVotingForm: React.FC<StepwiseVotingFormProps> = ({ session }) => {
                     </Badge>
                   </div>
                 </div>
+
+                {/* <div className='w-full items-center flex justify-center ' >
+                <AntImage
+                      src={`https://api.dicebear.com/9.x/avataaars-neutral/svg?seed=${getEmojiSeed(getCurrentVote()?.score || 0)}`}
+                      alt="Rating Emoji"
+                      className="w-full h-full object-contain"
+                      
+                    />
+                </div> */}
               </div>
             </motion.div>
+
           </AnimatePresence>
         </Card>
 
@@ -227,9 +240,9 @@ const StepwiseVotingForm: React.FC<StepwiseVotingFormProps> = ({ session }) => {
             <AnimatePresence mode="wait">
               <motion.div
                 key={`${currentCampus.id}-${currentCriterion.id}`}
-                initial={{ y: direction === 'up' ? '100%' : direction === 'down' ? '-100%' : 0 }}
+                initial={{ y: direction === 'up' ? '20%' : direction === 'down' ? '-20%' : 0 }}
                 animate={{ y: 0 }}
-                exit={{ y: direction === 'up' ? '-100%' : direction === 'down' ? '100%' : 0 }}
+                exit={{ y: direction === 'up' ? '-20%' : direction === 'down' ? '20%' : 0 }}
                 transition={{ type: 'spring', stiffness: 300, damping: 30 }}
                 className="flex flex-col gap-6"
               >
@@ -240,21 +253,31 @@ const StepwiseVotingForm: React.FC<StepwiseVotingFormProps> = ({ session }) => {
                   </p>
                 </div>
 
-                { (
-                  <div className="aspect-[16/9]  h-24 w-24 overflow-hidden rounded-lg bg-muted">
+                <div className="flex flex-col justify-center items-center">
+                  <div className="w-24 h-24 overflow-hidden rounded-lg bg-muted">
                     <AntImage
-                      src={currentCriterion.imageUrl || `https://api.dicebear.com/9.x/notionists-neutral/svg?seed=${currentCriterion.name}`}
-                      alt={currentCriterion.name}
-                      className="w-full h-full object-fill  "
-                      preview={{ maskClassName: 'rounded-lg' }}
+                      src={`https://api.dicebear.com/9.x/avataaars-neutral/svg?seed=${getEmojiSeed(getCurrentVote()?.score || 0)}`}
+                      alt="Rating Emoji"
+                      className="w-full h-full object-contain"
+                      preview={false}
                     />
                   </div>
-                )}
+                  <div className='sm:hidden '>
+              <p className="  text-sm font-bold text-orange-500 mb-2 text-center">
+                {getScoreLabel(getCurrentVote()?.score || 0)}
+              </p>
+              <div className="flex justify-center">
+                <Rate
+                  value={(getCurrentVote()?.score || 0) / 20}
+                  onChange={handleVoteChange}
+                  allowHalf
+                  className="text-2xl"
+                />
+              </div>
+            </div>
 
-                <div className="mt-4">
-                 
-                 
                 </div>
+
               </motion.div>
             </AnimatePresence>
           </div>
@@ -269,20 +292,21 @@ const StepwiseVotingForm: React.FC<StepwiseVotingFormProps> = ({ session }) => {
               Previous
             </Button>
 
-<div>
-<p className="text-sm font-bold text-orange-500 mb-2 text-center">
-                     {getScoreLabel(getCurrentVote()?.score || 0)}
-                  </p>
-            <div className="flex justify-center">
-                    <Rate
-                      value={(getCurrentVote()?.score || 0) / 20}
-                      onChange={handleVoteChange}
-                      allowHalf
-                      className="text-2xl"
-                      />
-                  </div>
-                      </div>
+            <div className='max-sm:hidden'>
+              <p className="  text-sm font-bold text-orange-500 mb-2 text-center">
+                {getScoreLabel(getCurrentVote()?.score || 0)}
+              </p>
+              <div className="flex justify-center">
+                <Rate
+                  value={(getCurrentVote()?.score || 0) / 20}
+                  onChange={handleVoteChange}
+                  allowHalf
+                  className="text-2xl"
+                />
+              </div>
+              </div>
 
+           
             {isLastStep ? (
               <Button
                 onClick={handleSubmit}

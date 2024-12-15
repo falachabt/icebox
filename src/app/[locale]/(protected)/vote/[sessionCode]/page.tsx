@@ -27,7 +27,10 @@ export default async function VotingPage({
 
   const canVote = await hasAlreadyTakenVote({ sessionCode : sessionCode });
 
-  if(!canVote.success){
+
+  console.log(session, canVote)
+
+  if(!canVote.success && canVote.error != "Voting session not found" ){
     return <InactiveSessionResult canVote = { canVote.success }  />
   }
 

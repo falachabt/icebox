@@ -1,10 +1,6 @@
-import { redirect } from "next/navigation"
 import { Session } from "next-auth"
 import { auth } from "@/lib/auth"
-import { headers } from "next/headers"
-
-
-
+import { redirect } from "@/lib/i18n"
 
 export default async function ProtectedLayout({
   children,
@@ -12,9 +8,10 @@ export default async function ProtectedLayout({
   children: React.ReactNode
 }>) {
   const session = (await auth()) as Session
-  const headersList = headers()
-  const pathname = headersList.get('x-pathname') || ''
+ 
+  const pathname =""
 
+  console.log("pathname", pathname)
 
   if (!session && !(pathname.includes("vote") && pathname.includes("result"))) {
     redirect("/login")

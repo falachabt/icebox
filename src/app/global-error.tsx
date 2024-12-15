@@ -12,7 +12,10 @@ export default function GlobalError({ error }: { error: unknown }) {
   return (
     <html>
       <body>
-        <Error statusCode={500} />
+        {
+          JSON.stringify(error)
+        }
+        {/* <Error statusCode={500} /> */}
       </body>
     </html>
   )

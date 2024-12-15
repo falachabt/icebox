@@ -1,15 +1,11 @@
-import { PrismaAdapter } from "@auth/prisma-adapter";
-import { UserRole } from "@prisma/client";
-import NextAuth from "next-auth";
-import Github from "next-auth/providers/github";
-import Google from "next-auth/providers/google";
-import { getUserById, deleteUserById, updateUserRole } from "@/lib/auth/db/user";
-import { db } from "@/lib/db";
-import { env } from "@/../.env.mjs";
-
-// Define admin and allowed email groups
-const ADMIN_EMAILS = ["benny.tenezeu@2027.icam.fr","mailys.coupannec@2027.icam.fr","sephora.mounoussala@2027.icam.fr"];
-const ALLOWED_EMAILS = ["sephora.mounoussala@2027.icam.fr", ...ADMIN_EMAILS];
+import { PrismaAdapter } from "@auth/prisma-adapter"
+import { UserRole } from "@prisma/client"
+import NextAuth from "next-auth"
+import Github from "next-auth/providers/github"
+import Google from "next-auth/providers/google"
+import { getUserById, deleteUserById, updateUserRole } from "@/lib/auth/db/user"
+import { db } from "@/lib/db"
+import { env } from "@/../.env.mjs"
 
 export const {
   handlers: { GET, POST },
@@ -37,93 +33,72 @@ export const {
   ],
   callbacks: {
     async signIn({ user }) {
-      if (!user.email) return false;
+      if (!user.email) return false
 
-      const existingUser = await getUserById(user.id || "");
+      const existingUser = await getUserById(user.id || "")
 
-      // If the user is an admin email
-      if (ADMIN_EMAILS.includes(user.email)) {
+      // Check if email is in AllowedEmails
+      const allowedEmail = await db.allowedEmails.findFirst({
+        where: {
+          email: user.email,
+        },
+        select: {
+          email: true,
+          role: true,
+        },
+      })
+
+      console.log("sa sa sa", allowedEmail)
+
+      // Allow ICAM emails as JURY if not in AllowedEmails
+      if (!allowedEmail && !user.email?.includes("2027.icam.fr")) {
         if (existingUser) {
-          // Update role to ADMIN if not already
-          if (existingUser.role !== UserRole.ADMIN) {
-            await updateUserRole(existingUser.id, UserRole.ADMIN);
-          }
-        } else {
-          // Create a new user with ADMIN role
-          await db.user.create({
-            data: {
-              id: user.id,
-              email: user.email,
-              name: user.name || null,
-              image: user.image || null,
-              role: UserRole.ADMIN,
-            },
-          });
+          await deleteUserById(existingUser.id)
         }
-        return true;
+        return false
       }
 
-      // If the user is in allowed emails but not admin
-      if (ALLOWED_EMAILS.includes(user.email)  || user.email?.includes("2027.icam.fr") ) {
-        if (existingUser) {
-          // Update role to JURY if not already
-          if (existingUser.role !== UserRole.JURY) {
-            await updateUserRole(existingUser.id, UserRole.JURY);
-          }
-        } else {
-          // Create a new user with JURY role
-          await db.user.create({
-            data: {
-              id: user.id,
-              email: user.email,
-              name: user.name || null,
-              image: user.image || null,
-              role: UserRole.JURY,
-            },
-          });
-        }
-        return true;
-      }
+      const role = allowedEmail?.role || UserRole.JURY
 
-      // If the user exists in DB but has no valid role, delete them
       if (existingUser) {
-        await deleteUserById(existingUser.id);
+        // Update role if it has changed
+        if (existingUser.role !== role) {
+          await updateUserRole(existingUser.id, role)
+        }
       }
 
-      // Deny access
-      return false;
+      return true
     },
     async jwt({ token }) {
-      if (!token.sub) return token;
+      if (!token.sub) return token
 
-      const existingUser = await getUserById(token.sub);
-      if (!existingUser) return token;
+      const existingUser = await getUserById(token.sub)
+      if (!existingUser) return token
 
-      token.role = existingUser.role;
-      token.createdAt = existingUser.createdAt;
+      token.role = existingUser.role
+      token.createdAt = existingUser.createdAt
 
-      return token;
+      return token
     },
     async session({ session, token }) {
       if (token) {
         if (token.sub && session.user) {
-          session.user.id = token.sub;
+          session.user.id = token.sub
         }
 
         if (token.role && session.user) {
-          session.user.role = token.role as UserRole;
+          session.user.role = token.role as UserRole
         }
 
         if (token.createdAt && session.user) {
-          session.user.createdAt = token.createdAt as Date;
+          session.user.createdAt = token.createdAt as Date
         }
       }
 
-      return session;
+      return session
     },
   },
-});
-
+})
 
 export async function getSessionOrThrow(message?: string) {
   const session = await auth()

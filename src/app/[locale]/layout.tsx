@@ -41,8 +41,8 @@ export default async function LocaleLayout({
           <Toaster position="bottom-right" />
           <NextIntlClientProvider locale={params.locale} messages={messages}>
             {children}
+          {/* <div id="modal-root" /> */}
           </NextIntlClientProvider>
-          <div id="modal-root" />
         </AuthProvider>
       </body>
     </html>

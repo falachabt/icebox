@@ -136,3 +136,21 @@ model ManualScore {
 
   @@unique([sessionId, campusId, criterionId])
 }
+
+model AllowedEmails {
+  id String @id @default(cuid())
+  email String
+  role UserRole
+  allowedCode AddAllowEmailCode @relation(fields: [allowedCodeId], references: [id])
+  allowedCodeId String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+
+model AddAllowEmailCode {
+  id String @id @default(cuid())
+  code String
+  description String
+  allowedEmails AllowedEmails[]
+}

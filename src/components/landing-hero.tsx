@@ -48,7 +48,7 @@ export function LandingHero() {
   
 
   return (
-    <div className="space-y-3 py-36 text-center font-bold sm:space-y-5">
+    <div className=" p-9 space-y-3 py-36 text-center font-bold sm:space-y-5">
       <div className="lg:text-7-xl z-50 space-y-1 text-3xl font-extrabold sm:space-y-5 sm:text-5xl md:text-6xl">
         <h1>
           {t.rich("title", {

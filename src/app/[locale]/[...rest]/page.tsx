@@ -5,7 +5,7 @@ import { Header } from "@/components/header"
 import { ScrollToTop } from "@/components/scroll-to-top"
 import { Title } from "@/components/title"
 
-export default async function Error404() {
+export default async function Error404(p) {
   const t = await getTranslations("Pages.Page404")
   return (
     <div className="flex min-h-screen flex-col">
@@ -14,7 +14,7 @@ export default async function Error404() {
         <div className="container space-y-8 py-24 text-center">
           <p className="text-6xl">{t("title")}</p>
 
-          <Title>{t("description")}</Title>
+          <Title>{p.searchParams.error == "AccessDenied" ? " You are not allow to login in this app " :  t("description")}</Title>
           <div>
             <Link href="/">{t("link")}</Link>
           </div>

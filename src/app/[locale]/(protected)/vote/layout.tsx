@@ -14,7 +14,7 @@ export default async function PublicLayout({
       <Header />
       <main className="grow">
         {children}
-        {modal}
+        {/* {modal} */}
       </main>
       <ScrollToTop />
       <Footer />

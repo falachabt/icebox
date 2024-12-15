@@ -14,7 +14,10 @@ export default async function PublicLayout({
       <Header />
       <main className="grow">
         {children}
-        {modal}
+        {/* Wrap modal in a div to ensure proper cleanup */}
+        <div id="modal-root">
+          {modal}
+        </div>
       </main>
       <ScrollToTop />
       <Footer />
