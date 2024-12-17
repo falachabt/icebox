@@ -57,12 +57,12 @@ export function SidebarMobile({ className }: { className?: string }) {
                 )}
                 <SidebarMobileNavItem
                   className="mt-8"
-                  href={publicRoutes.login?.href}
-                  icon={publicRoutes.login?.icon}
+                  href={publicRoutes.signin?.href}
+                  icon={publicRoutes.signin?.icon}
                   scroll={false}
                   onClick={() => setSheetOpen(false)}
                 >
-                  {t(`Routes.${publicRoutes.login?.translationKey || "login"}`)}
+                  {t(`Routes.${publicRoutes.signin?.translationKey || "signin"}`)}
                 </SidebarMobileNavItem>
               </ul>
             </div>

@@ -7,6 +7,7 @@ import { Toaster } from "@/components/ui/sonner"
 import { appConfig } from "@/../app.config"
 import "@/styles/globals.css"
 import "@uploadthing/react/styles.css";
+import { PgBar } from "@/components/providers/PgBar"
 
 const inter = Inter({ subsets: ["latin"] })
 
@@ -36,7 +37,8 @@ export default async function LocaleLayout({
       <head>
         <link rel="icon" href="/favicon-32x32.png" sizes="any" />
       </head>
-      <body className={inter.className}>
+      <body className={inter.className +  "  "}>
+          <PgBar/> 
         <AuthProvider>
           <Toaster position="bottom-right" />
           <NextIntlClientProvider locale={params.locale} messages={messages}>

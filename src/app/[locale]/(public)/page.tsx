@@ -8,7 +8,7 @@ import { LandingThings } from "@/components/landing-things"
 
 export default async function Home() {
   return (
-    <main>
+    <main className=" h-full mx-auto px-4 ">
       <LandingHero />
       {/* <LandingReferences />
       <LandingFeatures />

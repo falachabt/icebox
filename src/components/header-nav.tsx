@@ -5,13 +5,13 @@ import { useTranslations } from "next-intl"
 import { cn } from "@/lib/utils"
 import { publicRoutes } from "@/../app.config"
 
-const routes = [publicRoutes.pricing, publicRoutes.contact]
+const routes: any[] = []
 
 export function HeaderNav({ className }: { className?: string }) {
   const t = useTranslations("Routes")
   return (
     <div className={cn("mt-1 flex items-center bg-white z-[99999] space-x-8", className)}>
-      {routes.map(
+      {routes?.map(
         item =>
           item && (
             <Link

@@ -14,7 +14,7 @@ export async function ContentHeader({
   const session = (await auth()) as Session
 
   if (!session) {
-    redirect("/login")
+    redirect("/signin")
   }
 
   return (

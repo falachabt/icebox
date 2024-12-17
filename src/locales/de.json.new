@@ -1,12 +1,12 @@
 {
   "Meta": {
     "title": "icebox",
-    "description": "Bestes Boilerplate für Deine nächste Idee."
+    "description": "IceBox Challenge Edition 2024 By O2027"
   },
   "Routes": {
     "pricing": "Preise",
     "contact": "Kontakt",
-    "login": "Anmelden",
+    "signin": "Anmelden",
     "signup": "Registrieren",
     "dashboard": "Dashboard",
     "profile": "Profil",
@@ -28,7 +28,7 @@
     "BadgeAdmin": {
       "label": "Admin"
     },
-    "ButtonLogin": {
+    "Buttonsignin": {
       "title": "Anmelden"
     },
     "ButtonLogout": {
@@ -65,7 +65,7 @@
         "message_min_1": "Bitte gebe eine Nachricht ein."
       }
     },
-    "FormLogin": {
+    "Formsignin": {
       "title": "Anmelden",
       "button_google": "Mit Google anmelden",
       "button_github": "Mit GitHub anmelden"

@@ -18,7 +18,7 @@ export default async function VotingSessionsPage() {
   const session = await auth()
 
   if (!session) {
-    redirect('/login')
+    redirect('/signin')
   }
 
   const sessions = await db.votingSession.findMany({

@@ -15,7 +15,7 @@ import {
 export type RouteName = 
   | "pricing" 
   | "contact" 
-  | "login" 
+  | "signin" 
   | "dashboard" 
   | "profile" 
   | "settings"
@@ -91,9 +91,9 @@ export const publicRoutes: LocaleHasTranslationKey<LocalizedRoute> = {
       de: "/kontakt",
     },
   },
-  login: {
-    href: "/login",
-    translationKey: "login",
+  signin: {
+    href: "/signin",
+    translationKey: "signin",
     icon: KeyRound,
   },
 }

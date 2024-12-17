@@ -444,7 +444,7 @@ const ResultConfetti = ({ session, currentSession }: {
       setShowConfetti(true)
       
       // Optional: Hide confetti after some time
-      const timer = setTimeout(() => setShowConfetti(false), 5000)
+      const timer = setTimeout(() => setShowConfetti(false), 600000)
       return () => clearTimeout(timer)
     } else {
       setShowConfetti(false)
@@ -456,8 +456,8 @@ const ResultConfetti = ({ session, currentSession }: {
   return (
     <Confetti 
       width={window.innerWidth} 
-      numberOfPieces={500}
-      // recycle = {true}
+      numberOfPieces={35000}
+      recycle = {true}
       // recycle={false}  // This ensures confetti doesn't loop
     />
   )

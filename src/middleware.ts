@@ -1,14 +1,17 @@
 import createIntlMiddleware from "next-intl/middleware"
-import { auth as authMiddleware } from "@/lib/auth"
+import {  auth as authMiddleware } from "@/lib/auth"
 import { apiPrefix, appConfig } from "@/../app.config"
 import { pathnames } from "@/lib/i18n"
 import { NextResponse } from 'next/server'
 
-export default authMiddleware(request => {
+
+
+export default authMiddleware(async  request => {
   const { nextUrl } = request
 
   const isApiRoute = nextUrl.pathname.startsWith(apiPrefix)
   const isDashboard = nextUrl.pathname === '/dashboard'
+
 
   // Check for session code cookie if trying to access dashboard
   if (isDashboard) {

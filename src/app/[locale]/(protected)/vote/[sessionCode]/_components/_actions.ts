@@ -20,7 +20,11 @@ export async function hasAlreadyTakenVote({ sessionCode }: { sessionCode: string
     const session = await auth()
 
     if (!session?.user?.id) {
-      throw new Error('Not authenticated')
+      return { 
+        success: false, 
+        error: 'No loged user found' 
+      }
+      // throw new Error('Not authenticated')
     }
 
     // Get the voting session with its criteria and campuses

@@ -8,5 +8,7 @@ export async function AuthProvider({
 }>) {
   const session = await auth()
 
-  return <SessionProvider session={session}>{children}</SessionProvider>
+  return <SessionProvider session={session}>
+    
+    {children}</SessionProvider>
 }

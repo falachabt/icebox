@@ -2,13 +2,15 @@
 
 import { useCurrentUser } from "@/lib/auth/hooks/use-current-user"
 import { cn } from "@/lib/utils"
-import { ButtonLogin } from "@/components/button-login"
+// import { Buttonsignin } from "@/components/button-signin"
+
 import { ButtonSignup } from "@/components/button-signup"
 import { HeaderNav } from "@/components/header-nav"
 import { LocaleSwitcher } from "@/components/locale-switcher"
 import { Logo } from "@/components/logo"
 import { SidebarMobile } from "@/components/sidebar-mobile"
 import { UserDropdown } from "@/components/user-dropdown"
+import { ButtonLogin } from "./button-login"
 
 export function Header({ className }: { className?: string }) {
   const user = useCurrentUser()
@@ -29,7 +31,7 @@ export function Header({ className }: { className?: string }) {
       </span>
 
       <span className="flex items-center space-x-4">
-        <LocaleSwitcher />
+        {/* <LocaleSwitcher /> */}
         {!user && <ButtonLogin className="hidden sm:flex" variant="link" />}
         {user ? <UserDropdown user={user} /> : <ButtonSignup />}
       </span>

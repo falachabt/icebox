@@ -14,7 +14,7 @@ export default async function Error404(p) {
         <div className="container space-y-8 py-24 text-center">
           <p className="text-6xl">{t("title")}</p>
 
-          <Title>{p.searchParams.error == "AccessDenied" ? " You are not allow to login in this app " :  t("description")}</Title>
+          <Title>{p.searchParams.error == "AccessDenied" ? " You are not allow to login in this app " : p.searchParams.error == "AccessDeniedAdmin" ?   " This is an ADMIN reserved page " :  t("description")}</Title>
           <div>
             <Link href="/">{t("link")}</Link>
           </div>

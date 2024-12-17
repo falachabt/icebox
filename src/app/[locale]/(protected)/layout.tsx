@@ -9,12 +9,8 @@ export default async function ProtectedLayout({
 }>) {
   const session = (await auth()) as Session
  
-  const pathname =""
-
-  console.log("pathname", pathname)
-
-  if (!session && !(pathname.includes("vote") && pathname.includes("result"))) {
-    redirect("/login")
+  if (!session ) {
+    redirect("/signin")
   }
 
   return <div className="w-full">{children}</div>

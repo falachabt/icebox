@@ -5,7 +5,7 @@ import { SocialProvider } from "@/lib/auth/types"
 import { ButtonSocialLogin } from "@/components/button-social-login"
 
 export function FormLogin() {
-  const t = useTranslations("Components.FormLogin")
+  const t = useTranslations("Components.Formsignin")
   return (
     <section className="space-y-8 py-12 border rounded">
       <header className="flex justify-center">

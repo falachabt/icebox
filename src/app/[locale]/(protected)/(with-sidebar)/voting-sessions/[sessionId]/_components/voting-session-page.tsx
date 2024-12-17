@@ -131,6 +131,7 @@ const VotingSessionPage: React.FC<VotingSessionPageProps> = ({ session }) => {
 
   const handleManualScoreChange = async (campusId: string, criterionId: string, value: string) => {
     const numValue = Math.min(100, Math.max(0, Number(value) || 0));
+    
     setManualScores(prev => ({
       ...prev,
       [campusId]: {

@@ -15,7 +15,7 @@ export default async function CreateVotingSessionPage() {
   const session = await auth()
 
   if (!session) {
-    redirect('/login')
+    redirect('/signin')
   }
 
   // Fetch campuses and criteria for the form

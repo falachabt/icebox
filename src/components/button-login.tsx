@@ -11,15 +11,15 @@ export function ButtonLogin({
   scroll = false,
   variant,
 }: ButtonProps & { scroll?: boolean }) {
-  const t = useTranslations("Components.ButtonLogin")
-  const isCurrentPath = useCurrentPath("/login")
+  const t = useTranslations("Components.Buttonsignin")
+  const isCurrentPath = useCurrentPath("/signin")
   return (
     <Button
       variant={variant}
       asChild
       className={cn("flex items-center justify-start", className)}
     >
-      <Link href={!isCurrentPath ? "/login" : ""} scroll={scroll}>
+      <Link href={!isCurrentPath ? "/signin" : ""} scroll={scroll}>
         {t("title")}
       </Link>
     </Button>

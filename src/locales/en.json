@@ -1,12 +1,12 @@
 {
   "Meta": {
     "title": "icebox",
-    "description": "Best boilerplate for your next business."
+    "description": "IceBox Challenge Edition 2024 By O2027"
   },
   "Routes": {
     "pricing": "Pricing",
     "contact": "Contact",
-    "login": "Log in",
+    "signin": "Log in",
     "signup": "Sign up",
     "dashboard": "Dashboard",
     "profile": "Profile",
@@ -28,7 +28,7 @@
     "BadgeAdmin": {
       "label": "Admin"
     },
-    "ButtonLogin": {
+    "Buttonsignin": {
       "title": "Log in"
     },
     "ButtonLogout": {
@@ -65,7 +65,7 @@
         "message_min_1": "Please enter your message."
       }
     },
-    "FormLogin": {
+    "Formsignin": {
       "title": "Connect with your icam account",
       "button_google": "Sign in with Google",
       "button_github": "Sign in with GitHub"
@@ -91,7 +91,7 @@
       "manille": "Manille",
       "subtitle": "Enter the session code to join the voting session.",
       "link_dashboard": "Get To Dashboard",
-      "link_login": "Go to the voting session",
+      "link_signin": "Go to the voting session",
       "enter_session_code": "Enter session code",
       "vote_now": "vote_now"
     },

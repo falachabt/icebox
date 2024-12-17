@@ -15,7 +15,7 @@ export const {
 } = NextAuth({
   secret: env.AUTH_SECRET,
   pages: {
-    signIn: "/login",
+    signIn: "/signin",
     newUser: "/dashboard",
     error: "/error",
   },

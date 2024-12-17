@@ -58,7 +58,7 @@ export function UserDropdown({ user }: { user: Session["user"] }) {
               <DropdownMenuSeparator />
             </>
           )}
-          {userRoutes.map(
+          {isAdmin && userRoutes.map(
             (route, index) =>
               route && (
                 <DropdownMenuItem key={index} asChild>
