@@ -198,7 +198,7 @@ const StepwiseVotingForm: React.FC<StepwiseVotingFormProps> = ({ session }) => {
             >
               <div className="flex flex-col h-full">
                 <div className="flex items-center gap-4 mb-6">
-                  {currentCampus.imageUrl && (
+                  {/* {currentCampus.imageUrl && (
                     <div className="w-20 h-20 rounded-full overflow-hidden flex-shrink-0">
                       <AntImage
                         src={currentCampus.imageUrl}
@@ -207,7 +207,7 @@ const StepwiseVotingForm: React.FC<StepwiseVotingFormProps> = ({ session }) => {
                         preview={false}
                       />
                     </div>
-                  )}
+                  )} */}
                   <div>
                     <h2 className="text-2xl font-bold mb-2">{currentCampus.name}</h2>
                     <Badge variant="secondary" className="text-lg">
@@ -216,34 +216,35 @@ const StepwiseVotingForm: React.FC<StepwiseVotingFormProps> = ({ session }) => {
                   </div>
                 </div>
 
-                {/* <div className='w-full items-center flex justify-center ' >
+               <div className='w-full items-center flex justify-center ' >
                 <AntImage
-                      src={`https://api.dicebear.com/9.x/avataaars-neutral/svg?seed=${getEmojiSeed(getCurrentVote()?.score || 0)}`}
+                      src={currentCampus.imageUrl}
                       alt="Rating Emoji"
-                      className="w-full h-full object-contain"
+                      className="w-full h-full object-contain max-h-[500px] "
+                      height={400}
                       
                     />
-                </div> */}
+                </div> 
               </div>
             </motion.div>
 
           </AnimatePresence>
         </Card>
 
-        <Card className="relative p-6">
+        <Card className="relative flex flex-col justify-between p-6">
           <div className="absolute top-6 left-6 right-6 flex justify-between z-10">
             <div>Criterion {currentCriterionIndex + 1} of {session.criteria.length}</div>
             <Badge variant="secondary">Weight: {currentCriterion.weight}%</Badge>
           </div>
 
-          <div className="relative pt-12">
+          <div className="relative flex-1 pt-12">
             <AnimatePresence mode="wait">
               <motion.div
                 key={`${currentCampus.id}-${currentCriterion.id}`}
-                initial={{ y: direction === 'up' ? '20%' : direction === 'down' ? '-20%' : 0 }}
+                initial={{ y: direction === 'up' ? '10%' : direction === 'down' ? '-10%' : 0 }}
                 animate={{ y: 0 }}
-                exit={{ y: direction === 'up' ? '-20%' : direction === 'down' ? '20%' : 0 }}
-                transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+                exit={{ y: direction === 'up' ? '-10%' : direction === 'down' ? '10%' : 0 }}
+                transition={{ type: 'spring', stiffness: 300, damping:  20 }}
                 className="flex flex-col gap-6"
               >
                 <div>
@@ -253,7 +254,7 @@ const StepwiseVotingForm: React.FC<StepwiseVotingFormProps> = ({ session }) => {
                   </p>
                 </div>
 
-                <div className="flex flex-col justify-center items-center">
+                <div className="flex flex-col mt-24 justify-center items-center h-full ">
                   <div className="w-24 h-24 overflow-hidden rounded-lg bg-muted">
                     <AntImage
                       src={`https://api.dicebear.com/9.x/avataaars-neutral/svg?seed=${getEmojiSeed(getCurrentVote()?.score || 0)}`}

@@ -92,7 +92,7 @@ export function LandingHero() {
               <Button
                 asChild
                 variant={"gradient"}
-                size="xl"
+                size="lg"
                 className="w-full sm:w-auto"
               >
                 <Link href={`/vote/${sessionCode}`} scroll={false}>
@@ -103,7 +103,7 @@ export function LandingHero() {
               <Button
                 asChild
                 variant={"outline"}
-                size="xl"
+                size="lg"
                 className="w-full sm:w-auto"
               >
                 <Link href={`/vote/${sessionCode}/result`} scroll={false}>

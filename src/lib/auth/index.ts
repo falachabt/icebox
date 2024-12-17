@@ -16,7 +16,7 @@ export const {
   secret: env.AUTH_SECRET,
   pages: {
     signIn: "/signin",
-    newUser: "/dashboard",
+    newUser: "/",
     error: "/error",
   },
   adapter: PrismaAdapter(db),
@@ -51,7 +51,7 @@ export const {
       console.log("sa sa sa", allowedEmail)
 
       // Allow ICAM emails as JURY if not in AllowedEmails
-      if (!allowedEmail && !user.email?.includes("2027.icam.fr")) {
+      if (!allowedEmail ) {
         if (existingUser) {
           await deleteUserById(existingUser.id)
         }
