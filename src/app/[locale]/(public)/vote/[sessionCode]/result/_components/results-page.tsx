@@ -440,11 +440,11 @@ const ResultConfetti = ({ session, currentSession }: {
 
   useEffect(() => {
     // Show confetti when session exists and both session and currentSession are not active
-    if (session && !currentSession?.isActive && !session?.isActive) {
+    if (session && (!currentSession?.isActive || !session?.isActive)) {
       setShowConfetti(true)
       
       // Optional: Hide confetti after some time
-      const timer = setTimeout(() => setShowConfetti(false), 600000)
+      const timer = setTimeout(() => setShowConfetti(false), 18000)
       return () => clearTimeout(timer)
     } else {
       setShowConfetti(false)
@@ -456,7 +456,7 @@ const ResultConfetti = ({ session, currentSession }: {
   return (
     <Confetti 
       width={window.innerWidth} 
-      numberOfPieces={35000}
+      numberOfPieces={850}
       recycle = {true}
       // recycle={false}  // This ensures confetti doesn't loop
     />
